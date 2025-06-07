@@ -1,13 +1,14 @@
-from django.contrib import admin
+# documents/urls.py
+
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from docs.views import DocumentViewSet
+from docs.views import DocumentViewSet, DocumentListView
 
 router = DefaultRouter()
 router.register(r'documents', DocumentViewSet)
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('api/', include(router.urls)),
+    path('', include(router.urls)),  # This gives you /documents/, /documents/<id>/, etc.
+    path('my-documents/', DocumentListView.as_view(), name='my-documents'),  # Optional
 ]
 
